@@ -1,0 +1,18 @@
+{
+  "name": "pathos",
+  "version": "0.0.0",
+  "description": "Simple route parsing with support for wildcards and nested resources",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "sh test.sh"
+  },
+  "author": "Tuomas Kanerva",
+  "license": "MIT",
+  "devDependencies": {
+    "coffee-script": "^1.7.1",
+    "gulp": "^3.8.7",
+    "gulp-coffee": "^2.1.1",
+    "gulp-rimraf": "^0.1.0",
+    "mocha": "^1.21.3"
+  }
+}
