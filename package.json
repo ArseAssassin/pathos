@@ -1,6 +1,6 @@
 {
-  "name": "pathos",
-  "version": "0.0.0",
+  "name": "pathos-parser",
+  "version": "0.0.2",
   "description": "Simple route parsing with support for wildcards and nested resources",
   "main": "lib/index.js",
   "scripts": {

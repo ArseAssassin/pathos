@@ -18,6 +18,10 @@ describe "routes", ->
       assert route.match "/base/sub"
       assert !(route.match "/bases/sub")
 
+    it "should implicitly remove trailing slash", ->
+      route = routes.make("/base/:greeting")
+      assert route.match "/base/sub/"
+
   describe "parsing", ->
     it "should parse arguments from a string", ->
       route = routes.make("/base/:wildcard/:second")
@@ -34,4 +38,9 @@ describe "routes", ->
       route = routes.make("/base/:first/:second")
 
       assert.equal route.generate({second: 2, first: 1}), "/base/1/2"
+
+    it "should generate paths without trailing slash", ->
+      route = routes.make("/trailing/slash/")
+
+      assert.equal route.generate(), "/trailing/slash"
 

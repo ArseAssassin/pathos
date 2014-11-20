@@ -38,4 +38,42 @@ describe "resources", ->
         secondary: "and_this"
         id: "and_the_id"
 
+    it "should match all subresources", ->
+      result = resources.create
+        index: "/"
+        subResource: 
+          _path: "/:any"
+          index: "/"
+          secondary: 
+            _path: "/:secondary"
+            index: "/"
+            get: "/:id"
+
+      assert result.match("/any/path/here")
+      assert result.match("/any/path")
+      assert result.match("/any")
+
+    it "should parse all subresources", ->
+      result = resources.create
+        index: "/"
+        subResource: {
+          _path: "/:any",
+          index: "/",
+          secondary: {
+            _path: "/:secondary",
+            index: "/"
+            get: "/:id"
+          }
+        }
+
+      assert.deepEqual result.parse("/any/path"),
+        any: "any"
+        secondary: "path"
+
+      assert.deepEqual result.parse("/any/path/here"),
+        any: "any"
+        secondary: "path"
+        id: "here"
+
+
 

@@ -10,8 +10,17 @@ staticParser = (staticPart) ->
   content: staticPart
 
 
+removeTrailingSlash = (path) ->
+  if path.length > 1 && /\/$/.test(path)
+    path.slice(0, path.length-1)
+  else
+    path
+
+
 module.exports =
   make: (route) ->
+    route = removeTrailingSlash(route)
+
     parts = route.split("/").map (x) ->
       if x.indexOf(":") == 0
         wildcardParser(x)
@@ -40,6 +49,7 @@ module.exports =
 
 
     match: (path) -> 
+      path = removeTrailingSlash(path)
       pathParts = path.split("/")
       if pathParts.length != parts.length
         false
@@ -52,6 +62,7 @@ module.exports =
         true
 
     parse: (path) ->
+      path = removeTrailingSlash(path)
       pathParts = path.split("/")
       result = {}
       for n in [0..pathParts.length-1]
